@@ -65,7 +65,7 @@ grille.run();
 cout<<"---"<<endl;
 grille.print();
 grille.run();
-cout<<"---"<<endl;
+cout<<"---"<<endl;y
 grille.print();
 grille.run();
 cout<<"---"<<endl;
