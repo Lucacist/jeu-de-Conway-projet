@@ -7,7 +7,7 @@
 
 using namespace std;
 
-const int cellSize = 10;
+const int cellSize = 20;
 
 void renderGrid(const Grille& grille, int cellSize, sf::RenderWindow& window) {
     const auto& grid = grille.getGrid();
@@ -70,7 +70,7 @@ int main() {
                 }
             }
             renderGrid(grille, cellSize, window);
-            sf::sleep(sf::milliseconds(200));
+            sf::sleep(sf::milliseconds(100));
             grille.run();
         }
     } else {
