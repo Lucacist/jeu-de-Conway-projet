@@ -1,86 +1,81 @@
-#include <vector>
 #include <iostream>
-#include <algorithm>
+#include <vector>
+#include <fstream>
+#include <sstream>
+#include <SFML/Graphics.hpp>
+#include "Grille.h"
+
 using namespace std;
 
-class Grid{
-    vector<vector<int>> grid;
-    public:
-        Grid(vector<vector<int>> g) : grid(g){};
-        int AliveNeighbors(int x,int y){
-            int number=0;
-            for (int i=x-1;i<=x+1;i++){
-                for (int j=y-1;j<=y+1;j++){
-                    if (0<=i && i<=grid.size()-1 && 0<=j && j<=grid[0].size()-1){
-                        if(grid[i][j]==1){
-                            number++;
-                        }
-                    }
-                }
-            }
-            return number-grid[x][y];
-        }
-        void run(){
-            vector<vector<int>> newGrid(grid.size(), vector<int>(grid[0].size()));
-            for (int i=0;i<grid.size();i++){
-                for (int j=0;j<grid[0].size();j++){
-                    if (grid[i][j]==1){
-                        (this->AliveNeighbors(i,j)==2 || this->AliveNeighbors(i,j)==3) ? newGrid[i][j]=1 : newGrid[i][j]=0;
-                    }
-                    if (grid[i][j]==0){
-                        this->AliveNeighbors(i,j)==3 ? newGrid[i][j]=1 : newGrid[i][j]=0;
-                    }
-                }
-            }
-            this->grid=newGrid;
-        }
-        void print(){
-            for (int i=0;i<grid.size();i++){
-                for (int j=0;j<grid[0].size();j++){
-                    cout<<grid[i][j]<<" ";
-                }
-                cout<<endl;
+const int cellSize = 10;
+
+void renderGrid(const Grille& grille, int cellSize, sf::RenderWindow& window) {
+    const auto& grid = grille.getGrid();
+
+    window.clear();
+    sf::RectangleShape cell(sf::Vector2f(cellSize - 1.0f, cellSize - 1.0f));
+    for (int x = 0; x < grid.size(); ++x) {
+        for (int y = 0; y < grid[0].size(); ++y) {
+            if (grid[x][y] == 1) {
+                cell.setPosition(y * cellSize, x * cellSize);
+                window.draw(cell);
             }
         }
-};
+    }
+    window.display();
+}
 
-int main(){
+int main() {
+    ifstream inputFile("Input.txt");
+    if (!inputFile) {
+        cerr << "Erreur lors de l'ouverture du fichier !" << endl;
+        return 1;
+    }
 
-vector<vector<int>> matrice={{0,0,0,0,0,0},{0,0,0,0,0,0},{0,0,0,0,0,0},{1,1,1,0,0,0},{0,0,1,0,0,0},{0,1,0,0,0,0}};
-Grid grille{matrice};
-grille.print();
-grille.run();
-cout<<"---"<<endl;
-grille.print();
-grille.run();
-cout<<"---"<<endl;
-grille.print();
-grille.run();
-cout<<"---"<<endl;
-grille.print();
-grille.run();
-cout<<"---"<<endl;
-grille.print();
-grille.run();
-cout<<"---"<<endl;
-grille.print();
-grille.run();
-cout<<"---"<<endl;y
-grille.print();
-grille.run();
-cout<<"---"<<endl;
-grille.print();
-grille.run();
-cout<<"---"<<endl;
-grille.print();
-grille.run();
-cout<<"---"<<endl;
-grille.print();
-grille.run();
-cout<<"---"<<endl;
-grille.print();
-grille.run();
-cout<<"---"<<endl;
-grille.print();
+    // Lire la taille de la grille à partir de la première ligne
+    int rows, cols;
+    inputFile >> rows >> cols;
+    inputFile.ignore();
 
+    vector<vector<int>> matrice(rows, vector<int>(cols));
+    string line;
+    for (int i = 0; i < rows; ++i) {
+        getline(inputFile, line);
+        istringstream iss(line);
+        for (int j = 0; j < cols; ++j) {
+            iss >> matrice[i][j];
+        }
+    }
+    inputFile.close();
+
+    Grille grille{matrice};
+
+    cout << "Voulez-vous afficher la grille dans :\n1. Le terminal\n2. Une fenêtre graphique\n";
+    int choix;
+    cin >> choix;
+
+    if (choix == 1) {
+        for (int i = 0; i < 1000; i++) {
+            grille.print();
+            cout << "---" << endl;
+            grille.run();
+        }
+    } else if (choix == 2) {
+        sf::RenderWindow window(sf::VideoMode(cols * cellSize, rows * cellSize), "Jeu de la vie - Grille");
+        while (window.isOpen()) {
+            sf::Event event;
+            while (window.pollEvent(event)) {
+                if (event.type == sf::Event::Closed) {
+                    window.close();
+                }
+            }
+            renderGrid(grille, cellSize, window);
+            sf::sleep(sf::milliseconds(200));
+            grille.run();
+        }
+    } else {
+        cerr << "Choix invalide." << endl;
+    }
+
+    return 0;
 }
