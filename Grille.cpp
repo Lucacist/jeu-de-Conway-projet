@@ -58,5 +58,8 @@ void Grille::run() {
             }
         }
     }
+    if (grille==newGrid){
+        running=false;
+    }
     grille = newGrid;
 }

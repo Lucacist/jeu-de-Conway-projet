@@ -11,6 +11,7 @@ class Fichier{
     int largueur=0;
     public:
     Fichier(string c);
+    pair<int, int> getDims();
     vector<vector <int>> versMatrice();
 };
 

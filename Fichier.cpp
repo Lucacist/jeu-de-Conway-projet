@@ -7,6 +7,10 @@ Fichier::Fichier(string c){
     this->chemin=c;
     ifstream fichier(chemin);
     fichier>>this->hauteur>>this->largueur;
+}
+pair<int, int> Fichier::getDims()
+{
+    return pair<int, int>(hauteur,largueur);
 };
 
 vector<vector<int>> Fichier::versMatrice()
