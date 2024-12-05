@@ -1,6 +1,10 @@
-#include <vector>
 #include <iostream>
-#include <algorithm>
+#include <vector>
+#include <fstream>
+#include <sstream>
+#include <SFML/Graphics.hpp>
+#include "Grille.h"
+
 using namespace std;
 #include "Grille.h"
 #include "Fichier.h"
@@ -34,17 +38,34 @@ int main() {
     Fichier fichier{"Input.txt"};
     Grille grille{fichier.versMatrice()};
 
-    while (window.isOpen()) {
-        sf::Event event;
-        while (window.pollEvent(event)) {
-            if (event.type == sf::Event::Closed)
-                window.close();
+    Grille grille{matrice};
+
+    cout << "Voulez-vous afficher la grille dans :\n1. Le terminal\n2. Une fenêtre graphique\n";
+    int choix;
+    cin >> choix;
+
+    if (choix == 1) {
+        for (int i = 0; i < 1000; i++) {
+            grille.print();
+            cout << "---" << endl;
+            grille.run();
         }
-
-        renderGrid(window,grille);
-
-        sf::sleep(sf::milliseconds(20));
-        grille.run();
+    } else if (choix == 2) {
+        sf::RenderWindow window(sf::VideoMode(cols * cellSize, rows * cellSize), "Jeu de la vie - Grille");
+        while (window.isOpen()) {
+            sf::Event event;
+            while (window.pollEvent(event)) {
+                if (event.type == sf::Event::Closed) {
+                    window.close();
+                }
+            }
+            renderGrid(grille, cellSize, window);
+            sf::sleep(sf::milliseconds(100));
+            grille.run();
+        }
+    } else {
+        cerr << "Choix invalide." << endl;
     }
+
     return 0;
 }
