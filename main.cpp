@@ -13,8 +13,8 @@ using namespace std;
 #include <cstdlib>
 
 const int cellSize = 10;
-const int gridHeight = 70;
-const int gridWidth = 70;
+const int gridHeight = 70; // Rendre dynamique
+const int gridWidth = 70;   // Rendre dynamique
 
 void renderGrid(sf::RenderWindow &window, Grille &grille) {
     int x, y;
@@ -33,12 +33,9 @@ void renderGrid(sf::RenderWindow &window, Grille &grille) {
 }
 
 int main() {
-    sf::RenderWindow window(sf::VideoMode(gridWidth * cellSize, gridHeight * cellSize), "Game of Life");
 
     Fichier fichier{"Input.txt"};
     Grille grille{fichier.versMatrice()};
-
-    Grille grille{matrice};
 
     cout << "Voulez-vous afficher la grille dans :\n1. Le terminal\n2. Une fenêtre graphique\n";
     int choix;
@@ -51,7 +48,7 @@ int main() {
             grille.run();
         }
     } else if (choix == 2) {
-        sf::RenderWindow window(sf::VideoMode(cols * cellSize, rows * cellSize), "Jeu de la vie - Grille");
+        sf::RenderWindow window(sf::VideoMode(gridHeight * cellSize, gridWidth * cellSize), "Jeu de la vie - Grille");
         while (window.isOpen()) {
             sf::Event event;
             while (window.pollEvent(event)) {
@@ -59,7 +56,7 @@ int main() {
                     window.close();
                 }
             }
-            renderGrid(grille, cellSize, window);
+            renderGrid(window,grille);
             sf::sleep(sf::milliseconds(100));
             grille.run();
         }
