@@ -37,7 +37,7 @@ int Grille::AliveNeighbors(int x, int y) {
             int toricY = (j + cols) % cols;
 
             // Compter les cellules vivantes
-            if (grille[toricX][toricY].getEtat() == 1) {
+            if (grille[toricX][toricY].getEtat() == 1 || grille[toricX][toricY].getEtat()==3) {
                 number++;
             }
         }
@@ -48,12 +48,12 @@ int Grille::AliveNeighbors(int x, int y) {
 }
 
 void Grille::run() {
-    vector<vector<Cellule>> newGrid(grille.size(), vector<Cellule>(grille[0].size()));
+    vector<vector<Cellule>> newGrid=grille;
     for (int i = 0; i < grille.size(); i++) {
         for (int j = 0; j < grille[0].size(); j++) {
             if (grille[i][j].getEtat() == 1) {
                 newGrid[i][j] =Cellule(AliveNeighbors(i, j) == 2 || AliveNeighbors(i, j) == 3);
-            } else {
+            } else if (grille[i][j].getEtat()==0) {
                 newGrid[i][j] = Cellule(AliveNeighbors(i, j) == 3);
             }
         }

@@ -21,8 +21,11 @@ void renderGrid(sf::RenderWindow &window, Grille &grille,const int &hauteur, con
     sf::RectangleShape cell(sf::Vector2f(cellSize - 1.0f, cellSize - 1.0f));
     for (x = 0; x < hauteur; ++x) {
         for (y = 0; y < largueur; ++y) {
-            if (grille.getValue(x,y) == 1) {
+            if (grille.getValue(x,y) > 0) {
+                cell.setFillColor(sf::Color::White);
                 cell.setPosition(y * cellSize, x * cellSize);
+                if (grille.getValue(x,y)==2){cell.setFillColor(sf::Color::Red);}
+                if (grille.getValue(x,y)==3){cell.setFillColor(sf::Color::Green);}
                 window.draw(cell);
             }
         }

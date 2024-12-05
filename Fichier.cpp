@@ -17,15 +17,15 @@ Grille Fichier::versGrille()
 {
     vector<vector<Cellule>> grille(this->hauteur, vector<Cellule>(this->largueur));
     ifstream fichier(chemin);
-    int etat;
+    int valeur;
     fichier.ignore();
     fichier.ignore();
     fichier.ignore();
     fichier.ignore();
     for (int i=0;i<this->hauteur;i++){
         for(int j=0;j<this->largueur;j++){
-            fichier>>etat;
-            grille[i][j]=Cellule(etat);
+            fichier>>valeur;
+            grille[i][j]=Cellule(valeur);
         }
     }
     return grille;
