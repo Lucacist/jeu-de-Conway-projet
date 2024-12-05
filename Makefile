@@ -1,16 +1,16 @@
+all: main
+
 CXX = g++
-CXXFLAGS = -lsfml-graphics -lsfml-window -lsfml-audio -lsfml-network -lsfml-system -g -Wall -Werror
+override CXXFLAGS += -g -Wall 
 
 SRCS = $(shell find . -name '.ccls-cache' -type d -prune -o -type f -name '*.cpp' -print | sed -e 's/ /\\ /g')
 HEADERS = $(shell find . -name '.ccls-cache' -type d -prune -o -type f -name '*.h' -print)
 
-all: main
-
 main: $(SRCS) $(HEADERS)
-    $(CXX) $(CXXFLAGS) $(SRCS) -o "$@"
+	$(CXX) $(CXXFLAGS) $(SRCS) -o "$@" -lsfml-graphics -lsfml-window -lsfml-audio -lsfml-network -lsfml-system
 
 main-debug: $(SRCS) $(HEADERS)
-    $(CXX) $(CXXFLAGS) -U_FORTIFY_SOURCE -O0 $(SRCS) -o "$@"
+	$(CXX) $(CXXFLAGS) -U_FORTIFY_SOURCE -O0 $(SRCS) -o "$@" -lsfml-graphics -lsfml-window -lsfml-audio -lsfml-network -lsfml-system
 
 clean:
-    rm -f main main-debug
+	rm -f main main-debug

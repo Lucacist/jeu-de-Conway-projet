@@ -1,6 +1,29 @@
 #include "Grille.h"
-
+#include <iostream>
 using namespace std;
+
+Grille::Grille()
+{
+    this->grille={{}};
+}
+
+Grille::Grille(vector<vector<int>> g) : grille(g) {}
+int Grille::getValue(int h, int l)
+{
+    return this->grille[h][l];
+}
+    
+    void Grille::print() {
+        for (int i=0;i<grille.size();i++){
+            for (int j=0;j<grille[0].size();j++){
+                if (this->getValue(i,j) > 1) {
+                    cout << this->getValue(i,j) << endl;
+                }
+                grille [i][j]==1 ? cout<<"■"<<" ": cout<<"□"<<" ";
+            }
+            cout<<endl;
+        }
+    };
 
 int Grille::AliveNeighbors(int x, int y) {
     int number = 0;
@@ -36,13 +59,4 @@ void Grille::run() {
         }
     }
     grid = newGrid;
-}
-
-void Grille::print() const {
-    for (const auto& row : grid) {
-        for (int cell : row) {
-            cout << cell << " ";
-        }
-        cout << endl;
-    }
 }

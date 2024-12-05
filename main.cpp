@@ -6,17 +6,24 @@
 #include "Grille.h"
 
 using namespace std;
+#include "Grille.h"
+#include "Fichier.h"
+#include <SFML/Graphics.hpp>
+#include <ctime>
+#include <cstdlib>
 
-const int cellSize = 20;
+const int cellSize = 10;
+const int gridHeight = 70;
+const int gridWidth = 70;
 
-void renderGrid(const Grille& grille, int cellSize, sf::RenderWindow& window) {
-    const auto& grid = grille.getGrid();
-
+void renderGrid(sf::RenderWindow &window, Grille &grille) {
+    int x, y;
+    
     window.clear();
     sf::RectangleShape cell(sf::Vector2f(cellSize - 1.0f, cellSize - 1.0f));
-    for (int x = 0; x < grid.size(); ++x) {
-        for (int y = 0; y < grid[0].size(); ++y) {
-            if (grid[x][y] == 1) {
+    for (x = 0; x < gridHeight; ++x) {
+        for (y = 0; y < gridWidth; ++y) {
+            if (grille.getValue(x,y) == 1) {
                 cell.setPosition(y * cellSize, x * cellSize);
                 window.draw(cell);
             }
@@ -26,27 +33,10 @@ void renderGrid(const Grille& grille, int cellSize, sf::RenderWindow& window) {
 }
 
 int main() {
-    ifstream inputFile("Input.txt");
-    if (!inputFile) {
-        cerr << "Erreur lors de l'ouverture du fichier !" << endl;
-        return 1;
-    }
+    sf::RenderWindow window(sf::VideoMode(gridWidth * cellSize, gridHeight * cellSize), "Game of Life");
 
-    // Lire la taille de la grille à partir de la première ligne
-    int rows, cols;
-    inputFile >> rows >> cols;
-    inputFile.ignore();
-
-    vector<vector<int>> matrice(rows, vector<int>(cols));
-    string line;
-    for (int i = 0; i < rows; ++i) {
-        getline(inputFile, line);
-        istringstream iss(line);
-        for (int j = 0; j < cols; ++j) {
-            iss >> matrice[i][j];
-        }
-    }
-    inputFile.close();
+    Fichier fichier{"Input.txt"};
+    Grille grille{fichier.versMatrice()};
 
     Grille grille{matrice};
 

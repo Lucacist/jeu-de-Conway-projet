@@ -2,25 +2,17 @@
 #define GRILLE_H
 
 #include <vector>
-#include <iostream>
+using namespace std;
 
-class Grille {
-private:
-    std::vector<std::vector<int>> grid;
-
-public:
-    Grille(const std::vector<std::vector<int>>& g) : grid(g) {}
-
-    int AliveNeighbors(int x, int y);
-
+class Grille{
+    vector<vector<int>> grille;
+    public:
+    Grille();
+    Grille(vector<vector<int>> g);
+    int getValue(int h,int l);
+    int AliveNeighbors(int x,int y);
     void run();
-
-    void print() const;
-
-    // Accesseur pour la grille (nécessaire pour le rendu graphique)
-    const std::vector<std::vector<int>>& getGrid() const {
-        return grid;
-    }
+    void print();
 };
 
 #endif
