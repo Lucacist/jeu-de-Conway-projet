@@ -1,3 +1,4 @@
+#include <filesystem> // Pour gérer les fichiers
 #include <iostream>
 #include <vector>
 #include <fstream>
@@ -6,7 +7,7 @@
 #include "Grille.h"
 
 using namespace std;
-
+namespace fs = std::filesystem; 
 const int cellSize = 20;
 
 void renderGrid(const Grille& grille, int cellSize, sf::RenderWindow& window) {
@@ -23,6 +24,14 @@ void renderGrid(const Grille& grille, int cellSize, sf::RenderWindow& window) {
         }
     }
     window.display();
+}
+
+void deletePreviousFiles(const string& prefix) {
+    for (const auto& entry : fs::directory_iterator(".")) {
+        if (entry.is_regular_file() && entry.path().string().find(prefix) != string::npos) {
+            fs::remove(entry.path());
+        }
+    }
 }
 
 int main() {
@@ -55,10 +64,42 @@ int main() {
     cin >> choix;
 
     if (choix == 1) {
-        for (int i = 0; i < 1000; i++) {
-            grille.print();
-            cout << "---" << endl;
-            grille.run();
+        string outputDirectory = "./Output";
+        while (true) {
+            cout << "Combien d'itérations voulez-vous générer ? ";
+            int iterations;
+            cin >> iterations;
+
+            if (iterations <= 0) {
+                cout << "Nombre d'itérations invalide. Arrêt du programme." << endl;
+                break;
+            }
+
+            deletePreviousFiles("Grille_Etat_");
+
+            for (int i = 0; i < iterations; i++) {
+                grille.print();
+                cout << "---" << endl;
+
+                stringstream filename;
+                filename << "Input_out" << i << ".txt"; 
+                ofstream outputFile(filename.str());
+                if (!outputFile) {
+                    cerr << "Erreur lors de la création du fichier !" << endl;
+                    return 1;
+                }
+
+                const auto& grid = grille.getGrid();
+                for (const auto& row : grid) {
+                    for (int cell : row) {
+                        outputFile << cell << " ";
+                    }
+                    outputFile << endl;
+                }
+                outputFile.close();
+
+                grille.run();
+            }
         }
     } else if (choix == 2) {
         sf::RenderWindow window(sf::VideoMode(cols * cellSize, rows * cellSize), "Jeu de la vie - Grille");
