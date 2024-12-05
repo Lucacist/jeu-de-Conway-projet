@@ -1,15 +1,16 @@
 #ifndef GRILLE_H
 #define GRILLE_H
 
+#include "Cellule.h"
 #include <vector>
 using namespace std;
 
 class Grille{
-    vector<vector<int>> grille;
+    vector<vector<Cellule>> grille;
     public:
     bool running=true;
     Grille();
-    Grille(vector<vector<int>> g);
+    Grille(vector<vector<Cellule>> g);
     int getValue(int h,int l);
     int AliveNeighbors(int x,int y);
     void run();

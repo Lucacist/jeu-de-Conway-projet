@@ -7,10 +7,10 @@ Grille::Grille()
     this->grille={{}};
 }
 
-Grille::Grille(vector<vector<int>> g) : grille(g) {}
+Grille::Grille(vector<vector<Cellule>> g) : grille(g) {}
 int Grille::getValue(int h, int l)
 {
-    return this->grille[h][l];
+    return this->grille[h][l].getEtat();
 }
     
 void Grille::print() {
@@ -19,7 +19,7 @@ void Grille::print() {
             if (this->getValue(i,j) > 1) {
                 cout << this->getValue(i,j) << endl;
             }
-            grille [i][j]==1 ? cout<<"■"<<" ": cout<<"□"<<" ";
+            grille [i][j].getEtat()==1 ? cout<<"■"<<" ": cout<<"□"<<" ";
         }
         cout<<endl;
     }
@@ -37,24 +37,24 @@ int Grille::AliveNeighbors(int x, int y) {
             int toricY = (j + cols) % cols;
 
             // Compter les cellules vivantes
-            if (grille[toricX][toricY] == 1) {
+            if (grille[toricX][toricY].getEtat() == 1) {
                 number++;
             }
         }
     }
 
     // Retirer la cellule elle-même si elle est vivante
-    return number - grille[x][y];
+    return number - grille[x][y].getEtat();
 }
 
 void Grille::run() {
-    vector<vector<int>> newGrid(grille.size(), vector<int>(grille[0].size()));
+    vector<vector<Cellule>> newGrid(grille.size(), vector<Cellule>(grille[0].size()));
     for (int i = 0; i < grille.size(); i++) {
         for (int j = 0; j < grille[0].size(); j++) {
-            if (grille[i][j] == 1) {
-                newGrid[i][j] = (AliveNeighbors(i, j) == 2 || AliveNeighbors(i, j) == 3) ? 1 : 0;
+            if (grille[i][j].getEtat() == 1) {
+                newGrid[i][j] =Cellule(AliveNeighbors(i, j) == 2 || AliveNeighbors(i, j) == 3);
             } else {
-                newGrid[i][j] = (AliveNeighbors(i, j) == 3) ? 1 : 0;
+                newGrid[i][j] = Cellule(AliveNeighbors(i, j) == 3);
             }
         }
     }

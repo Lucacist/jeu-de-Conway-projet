@@ -39,7 +39,7 @@ int main() {
     Fichier fichier{chemin};
     int hauteur = fichier.getDims().first;
     int largueur = fichier.getDims().second;
-    Grille grille{fichier.versMatrice()};
+    Grille grille=fichier.versGrille();
 
     cout << "Voulez-vous afficher la grille dans :\n1. Le terminal\n2. Une fenêtre graphique\n";
     int choix;

@@ -3,6 +3,7 @@
 
 #include <string>
 #include <vector>
+#include "Grille.h"
 using namespace std;
 
 class Fichier{
@@ -12,7 +13,7 @@ class Fichier{
     public:
     Fichier(string c);
     pair<int, int> getDims();
-    vector<vector <int>> versMatrice();
+    Grille versGrille();
 };
 
 #endif

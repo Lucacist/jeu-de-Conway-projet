@@ -13,17 +13,19 @@ pair<int, int> Fichier::getDims()
     return pair<int, int>(hauteur,largueur);
 };
 
-vector<vector<int>> Fichier::versMatrice()
+Grille Fichier::versGrille()
 {
-    vector<vector<int>> grille(this->hauteur, vector<int>(this->largueur));
+    vector<vector<Cellule>> grille(this->hauteur, vector<Cellule>(this->largueur));
     ifstream fichier(chemin);
+    int etat;
     fichier.ignore();
     fichier.ignore();
     fichier.ignore();
     fichier.ignore();
     for (int i=0;i<this->hauteur;i++){
         for(int j=0;j<this->largueur;j++){
-            fichier>>grille[i][j];
+            fichier>>etat;
+            grille[i][j]=Cellule(etat);
         }
     }
     return grille;
