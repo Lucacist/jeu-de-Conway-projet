@@ -1,6 +1,9 @@
 #include "Grille.h"
 #include <iostream>
+#include <unordered_map>
 using namespace std;
+
+unordered_map<int, string> chars = {{0, "□"}, {1, "■"},{2,"▲"},{3,"●"}};
 
 Grille::Grille()
 {
@@ -16,10 +19,7 @@ int Grille::getValue(int h, int l)
 void Grille::print() {
     for (int i=0;i<grille.size();i++){
         for (int j=0;j<grille[0].size();j++){
-            if (this->getValue(i,j) > 1) {
-                cout << this->getValue(i,j) << endl;
-            }
-            grille [i][j].getEtat()==1 ? cout<<"■"<<" ": cout<<"□"<<" ";
+            cout << chars[grille[i][j].getEtat()]<<" ";
         }
         cout<<endl;
     }

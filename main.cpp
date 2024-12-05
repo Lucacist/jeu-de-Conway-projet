@@ -39,6 +39,8 @@ int main() {
     cout <<"Entrer le chemin du fichier\n";
     cin>>chemin;
 
+    bool pause=false;
+
     Fichier fichier{chemin};
     int hauteur = fichier.getDims().first;
     int largueur = fichier.getDims().second;
@@ -49,7 +51,7 @@ int main() {
     cin >> choix;
 
     if (choix == 1) {
-        for (int i = 0; i < 1000 && grille.running; i++) {
+        for (int i = 0; i < 10 && grille.running; i++) {
             grille.print();
             cout << "---" << endl;
             grille.run();
@@ -62,10 +64,18 @@ int main() {
                 if (event.type == sf::Event::Closed) {
                     window.close();
                 }
+                if (event.type==sf::Event::KeyPressed){
+                    switch(event.key.code){
+                        case sf::Keyboard::Space:
+                        pause=!pause;
+                        break;
+
+                    }
+                }
             }
             renderGrid(window,grille,hauteur,largueur);
             sf::sleep(sf::milliseconds(100));
-            if (grille.running){
+            if (grille.running && !pause){
                 grille.run();
             }
         }
