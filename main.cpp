@@ -72,6 +72,11 @@ int main() {
 
                     }
                 }
+                if (sf::Mouse::isButtonPressed(sf::Mouse::Left)){
+                    sf::Vector2i mousePos = sf::Mouse::getPosition(window);
+                    cout << "Mouse Position: (" << mousePos.x << ", " << mousePos.y << ")" << endl;
+                    grille.setValue((int)(mousePos.y/cellSize),(int)(mousePos.x/cellSize),1);
+                }
             }
             renderGrid(window,grille,hauteur,largueur);
             sf::sleep(sf::milliseconds(100));

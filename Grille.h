@@ -12,6 +12,7 @@ class Grille{
     Grille();
     Grille(vector<vector<Cellule>> g);
     int getValue(int h,int l);
+    void setValue(int h,int l,int v);
     int AliveNeighbors(int x,int y);
     void run();
     void print();

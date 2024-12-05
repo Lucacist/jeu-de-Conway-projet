@@ -15,7 +15,12 @@ int Grille::getValue(int h, int l)
 {
     return this->grille[h][l].getEtat();
 }
-    
+
+void Grille::setValue(int h, int l, int v)
+{
+    grille[h][l].setEtat(v);
+}
+
 void Grille::print() {
     for (int i=0;i<grille.size();i++){
         for (int j=0;j<grille[0].size();j++){
