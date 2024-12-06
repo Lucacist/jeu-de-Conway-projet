@@ -8,26 +8,26 @@
 
 # 📋 **Sommaire**
 
-1. **[Introduction](#1-introduction)**  
+1. **[Introduction](#-1-introduction)**  
    - Présentation du projet et des objectifs.  
 
-2. **[Principe de Fonctionnement](#2-principe-de-fonctionnement)**  
+2. **[Principe de Fonctionnement](#%EF%B8%8F-2-principe-de-fonctionnement)**  
    - Règles d’évolution des cellules.  
    - Structure de la grille et états des cellules.  
 
-3. **[Spécifications Techniques](#3-spécifications-techniques)**  
-   - **[Fonctionnalités de Base](#31-fonctionnalités-de-base)**  
+3. **[Spécifications Techniques](#%EF%B8%8F-3-sp%C3%A9cifications-techniques)**  
+   - **[Fonctionnalités de Base](#-31-fonctionnalit%C3%A9s-de-base)**  
      - Mode console.  
      - Mode graphique avec SFML.  
-   - **[Extensions Réalisées](#32-extensions-réalisées)**  
+   - **[Extensions Réalisées](#-32-extensions-r%C3%A9alis%C3%A9es)**  
      - Grille torique.  
      - Cellules obstacles.  
-   - **[Bonus](#33-bonus)**  
+   - **[Bonus](#-33-bonus)**  
      - Modification dynamique des cellules.  
      - Pause dans le mode graphique.  
      - Génération d’un fichier aléatoire.  
 
-4. **[Implémentation en C++](#4-implémentation-en-c++)**  
+4. **[Implémentation en C++](#-4-impl%C3%A9mentation-en-c)**  
    - Langage et bibliothèques utilisés.  
    - Structure du projet.  
 
