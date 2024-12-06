@@ -4,8 +4,8 @@
 #include <sstream>
 #include <SFML/Graphics.hpp>
 #include <filesystem>
-#include <cstdlib> // pour rand() et srand()
-#include <ctime>   // pour initialiser rand()
+#include <cstdlib>
+#include <ctime>
 #include "Grille.h"
 #include "Fichier.h"
 
@@ -58,8 +58,8 @@ int main()
     cout << "Entrer le chemin du fichier\n";
     cin >> chemin;
 
-    int largueurFenetre = 1440;
-    int HauteurFenetre = 900;
+    int largueurF = 1440;
+    int hauteurF = 900;
     int delai = 5;
     bool pause = false;
 
@@ -89,11 +89,9 @@ int main()
 
     if (choix == 1)
     {
-        // Création du dossier de sortie
         string dossierSortie = chemin + "_out";
         nettoyerDossier(dossierSortie);
 
-        // Nombre d'itérations à sauvegarder
         int n;
         cout << "Combien d'itérations voulez-vous sauvegarder ?\n";
         cin >> n;
@@ -103,8 +101,7 @@ int main()
             grille.print();
             cout << "---" << endl;
 
-            // Sauvegarde de l'état actuel dans un fichier
-            fichier.sauvegarderEtat(grille, dossierSortie, i); // Utilisation de la méthode sauvegarderEtat
+            fichier.sauvegarderEtat(grille, dossierSortie, i);
             grille.run();
         }
 
@@ -122,24 +119,24 @@ int main()
         textClic.setString("Clic gauche pour ajouter une cellule");
         textClic.setCharacterSize(16);
         textClic.setFillColor(sf::Color::Yellow);
-        textClic.setPosition(10, HauteurFenetre - 60);
+        textClic.setPosition(10, hauteur*cellSize - 60);
         sf::Text textEspace = textClic;
         textEspace.setString("Espace pour mettre en pause");
-        textEspace.setPosition(10, HauteurFenetre - 40);
+        textEspace.setPosition(10, hauteur*cellSize - 40);
         sf::Text textFleche = textEspace;
         textFleche.setString("^/v pour modifier la vitesse");
-        textFleche.setPosition(10, HauteurFenetre - 20);
+        textFleche.setPosition(10, hauteur*cellSize - 20);
         sf::Text textVitesse = textFleche;
-        textVitesse.setPosition(largueurFenetre-50, HauteurFenetre - 20);
+        textVitesse.setPosition(largueur*cellSize - 50, hauteur*cellSize - 20);
         sf::Text textPause = textVitesse;
         textPause.setString("PAUSE");
         textPause.setStyle(sf::Text::Bold);
-        textPause.setPosition(largueurFenetre / 2, HauteurFenetre / 2 + 50);
+        textPause.setPosition(largueur*cellSize / 2, hauteur*cellSize / 2 + 50);
         sf::Text textFin = textPause;
         textFin.setString("FIN");
-        textFin.setPosition(largueurFenetre / 2, HauteurFenetre / 2);
+        textFin.setPosition(largueur*cellSize / 2, hauteur*cellSize / 2);
         textFin.setFillColor(sf::Color::Red);
-        sf::RenderWindow window(sf::VideoMode(largueurFenetre, HauteurFenetre), "Jeu de la vie - Grille");
+        sf::RenderWindow window(sf::VideoMode(largueur*cellSize, hauteur*cellSize), "Jeu de la vie - Grille");
         while (window.isOpen())
         {
             sf::Event event;
@@ -180,17 +177,17 @@ int main()
             window.draw(textClic);
             window.draw(textEspace);
             window.draw(textFleche);
-            textVitesse.setString(std::to_string(11-delai));
+            textVitesse.setString(std::to_string(11 - delai));
             window.draw(textVitesse);
-            if (grille.running && pause)
+            if (grille.isRunning() && pause)
             {
                 window.draw(textPause);
             }
-            if (!grille.running)
+            if (!grille.isRunning())
             {
                 window.draw(textFin);
             }
-            if (grille.running && !pause)
+            if (grille.isRunning() && !pause)
             {
                 grille.run();
             }

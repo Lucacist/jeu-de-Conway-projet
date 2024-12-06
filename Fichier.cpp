@@ -2,41 +2,50 @@
 #include <fstream>
 #include <iostream>
 #include <sstream>
-#include <cstdlib> // pour rand() et srand()
-#include <ctime>   // pour initialiser rand()
+#include <cstdlib>
+#include <ctime>
 
 using namespace std;
 
-Fichier::Fichier(){
+Fichier::Fichier()
+{
     this->hauteur = 0;
     this->largueur = 0;
     this->chemin = "";
 }
 
-Fichier::Fichier(string c) {
+Fichier::Fichier(string c)
+{
     this->chemin = c;
     ifstream fichier(chemin);
-    if (fichier) {
+    if (fichier)
+    {
         fichier >> this->hauteur >> this->largueur;
-    } else {
+    }
+    else
+    {
         cerr << "Erreur : impossible d'ouvrir le fichier " << chemin << endl;
     }
 }
 
-pair<int, int> Fichier::getDims() {
+pair<int, int> Fichier::getDims()
+{
     return pair<int, int>(hauteur, largueur);
 }
 
-Grille Fichier::versGrille() {
+Grille Fichier::versGrille()
+{
     vector<vector<Cellule>> grille(this->hauteur, vector<Cellule>(this->largueur));
     ifstream fichier(chemin);
     int valeur;
-    fichier.ignore(); // Ignore les premières lignes si nécessaire
     fichier.ignore();
     fichier.ignore();
     fichier.ignore();
-    for (int i = 0; i < this->hauteur; i++) {
-        for (int j = 0; j < this->largueur; j++) {
+    fichier.ignore();
+    for (int i = 0; i < this->hauteur; i++)
+    {
+        for (int j = 0; j < this->largueur; j++)
+        {
             fichier >> valeur;
             grille[i][j] = Cellule(valeur);
         }
@@ -44,20 +53,23 @@ Grille Fichier::versGrille() {
     return grille;
 }
 
-// Définition de la méthode genererFichierAleatoire
-void Fichier::genererFichierAleatoire(const string &chemin, int hauteur, int largeur) {
+void Fichier::genererFichierAleatoire(const string &chemin, int hauteur, int largeur)
+{
     this->hauteur = hauteur;
     this->largueur = largeur;
     ofstream fichier(chemin);
-    if (!fichier) {
+    if (!fichier)
+    {
         cerr << "Erreur lors de la création du fichier." << endl;
         return;
     }
     fichier << this->hauteur << " " << this->largueur << " " << endl;
-    srand(time(nullptr)); // Initialisation de la graine pour rand()
-    for (int i = 0; i < hauteur; ++i) {
-        for (int j = 0; j < largeur; ++j) {
-            fichier << rand() % 2 << " "; // Génère des cellules avec des états 0 ou 1
+    srand(time(nullptr));
+    for (int i = 0; i < hauteur; ++i)
+    {
+        for (int j = 0; j < largeur; ++j)
+        {
+            fichier << rand() % 2 << " ";
         }
         fichier << endl;
     }
@@ -66,20 +78,22 @@ void Fichier::genererFichierAleatoire(const string &chemin, int hauteur, int lar
     cout << "Fichier généré avec succès : " << chemin << endl;
 }
 
-// Définition de la méthode sauvegarderEtat
-void Fichier::sauvegarderEtat(const Grille &grille, const string &cheminDossier, int iteration) {
+void Fichier::sauvegarderEtat(Grille &grille, const string &cheminDossier, int iteration)
+{
     ostringstream fichierNom;
     fichierNom << cheminDossier << "/iteration_" << iteration << ".txt";
 
     ofstream fichier(fichierNom.str());
-    if (!fichier) {
+    if (!fichier)
+    {
         cerr << "Erreur lors de la création du fichier : " << fichierNom.str() << endl;
         return;
     }
 
-    // Sauvegarde des données de la grille
-    for (int i = 0; i < grille.getHauteur(); ++i) {
-        for (int j = 0; j < grille.getLargeur(); ++j) {
+    for (int i = 0; i < grille.getHauteur(); ++i)
+    {
+        for (int j = 0; j < grille.getLargeur(); ++j)
+        {
             fichier << grille.getValue(i, j) << " ";
         }
         fichier << endl;
