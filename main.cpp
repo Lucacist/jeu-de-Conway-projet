@@ -30,7 +30,6 @@ void renderGrid(sf::RenderWindow &window, Grille &grille,const int &hauteur, con
             }
         }
     }
-    window.display();
 }
 
 int main() {
@@ -57,6 +56,27 @@ int main() {
             grille.run();
         }
     } else if (choix == 2) {
+        sf::Font font;
+        if (!font.loadFromFile("Inter-Black.woff2")){
+            cout<<"Erreur lors de l'ouverture de la police";
+        }
+        sf::Text textClic;
+        textClic.setFont(font);
+        textClic.setString("Clic gauche pour ajouter une cellule");
+        textClic.setCharacterSize(16);
+        textClic.setFillColor(sf::Color::White);
+        textClic.setPosition(10,hauteur * cellSize-50);
+        sf::Text textEspace=textClic;
+        textEspace.setString("Espace pour mettre en pause");
+        textEspace.setPosition(10,hauteur * cellSize-30);
+        sf::Text textPause=textClic;
+        textPause.setString("PAUSE");
+        textPause.setStyle(sf::Text::Bold);
+        textPause.setPosition(largueur*cellSize/2,hauteur * cellSize/2+50);
+        sf::Text textFin=textPause;
+        textFin.setString("FIN");
+        textFin.setPosition(largueur*cellSize/2,hauteur * cellSize/2);
+        textFin.setFillColor(sf::Color::Red);
         sf::RenderWindow window(sf::VideoMode(hauteur * cellSize, largueur * cellSize), "Jeu de la vie - Grille");
         while (window.isOpen()) {
             sf::Event event;
@@ -79,10 +99,19 @@ int main() {
                 }
             }
             renderGrid(window,grille,hauteur,largueur);
-            sf::sleep(sf::milliseconds(50));
+            window.draw(textClic);
+            window.draw(textEspace);
+            if (grille.running && pause){
+                window.draw(textPause);
+            }
+            if (!grille.running){
+                window.draw(textFin);
+            }
             if (grille.running && !pause){
                 grille.run();
             }
+            window.display();
+            sf::sleep(sf::milliseconds(50));
         }
     } else {
         cerr << "Choix invalide." << endl;
