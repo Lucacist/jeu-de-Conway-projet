@@ -169,7 +169,7 @@ int main()
                     int l = mousePos.x / cellSize;
                     if (h < grille.getHauteur() && l < grille.getLargeur())
                     {
-                        grille.setValue(h, l, 1);
+                        grille.setValue(h, l, !grille.getValue(h,l));
                     }
                 }
             }
