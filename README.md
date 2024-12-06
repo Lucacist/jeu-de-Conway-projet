@@ -33,18 +33,21 @@ Le *Jeu de la Vie* est un automate cellulaire créé par le mathématicien John 
    - Simulation des états successifs pour un nombre donné d'itérations.
    - Sauvegarde des états dans un répertoire nommé `<nom_du_fichier_dentree>_out`.
 <img style="width:400px;" alt="Capture d'écran 2024-12-06 143850" src="https://github.com/user-attachments/assets/30dbaa17-e091-4d56-a4ca-13f2066b3b0f">
+<br>
+<br>
 
 2. **Mode Graphique (avec SFML) :**
    - Affichage de la grille et des états des cellules en temps réel.
    - Contrôle du temps entre deux itérations avec les touches "<" et ">".
    - Possibilité de **modifier l'état des cellules avec la souris**.
+<img width="400" alt="Capture d'écran 2024-12-06 144330" src="https://github.com/user-attachments/assets/3f1c7202-4596-4429-9ac7-7563f1d5c524">
 
 ### **3.2. Extensions Réalisées**
 1. **Grille Torique :**
    - Les cellules des bords sont adjacentes à celles situées à l’opposé (ligne/colonne).
      
 2. **Cellules obstacle :**
-   - L’état des cellules obstacles n’évolue pas au cours de l’exécution. Ces dernières possèdent un état vivant "3" ou mort "4". 
+   - L’état des cellules obstacles n’évolue pas au cours de l’exécution. Ces dernières possèdent un état vivant "3 ou vert" ou mort "4 ou rouge". 
 
 ### **3.3. Bonus**
 1. **Modification Dynamique des Cellules (Mode Graphique) :**
