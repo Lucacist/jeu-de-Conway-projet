@@ -9,6 +9,7 @@
 #include "Grille.h"
 #include "Fichier.h"
 
+
 using namespace std;
 namespace fs = std::filesystem;
 
@@ -33,98 +34,11 @@ void renderGrid(sf::RenderWindow &window, Grille &grille) {
     }
 }
 
-void sauvegarderEtat(const Grille &grille, const string &cheminDossier, int iteration) {
-    ostringstream fichierNom;
-    fichierNom << cheminDossier << "/iteration_" << iteration << ".txt";
-
-    ofstream fichier(fichierNom.str());
-    if (!fichier) {
-        cerr << "Erreur lors de la création du fichier : " << fichierNom.str() << endl;
-        return;
-    }
-
-    for (int i = 0; i < grille.getHauteur(); ++i) {
-        for (int j = 0; j < grille.getLargeur(); ++j) {
-            fichier << grille.getValue(i, j) << " ";
-        }
-        fichier << endl;
-    }
-
-    fichier.close();
-}
-
 void nettoyerDossier(const string &cheminDossier) {
     if (fs::exists(cheminDossier)) {
         fs::remove_all(cheminDossier);
     }
     fs::create_directory(cheminDossier);
-}
-
-void genererFichierAleatoire(const string &chemin, int hauteur, int largeur) {
-    ofstream fichier(chemin);
-    if (!fichier) {
-        cerr << "Erreur lors de la création du fichier." << endl;
-        return;
-    }
-
-    srand(time(nullptr)); // Initialisation de la graine pour rand()
-
-    for (int i = 0; i < hauteur; ++i) {
-        for (int j = 0; j < largeur; ++j) {
-            fichier << rand() % 2 << " "; // Génère des cellules avec des états 0 ou 1
-        }
-        fichier << endl;
-    }
-
-    fichier.close();
-    cout << "Fichier généré avec succès : " << chemin << endl;
-}
-
-void sauvegarderEtat(const Grille &grille, const string &cheminDossier, int iteration) {
-    ostringstream fichierNom;
-    fichierNom << cheminDossier << "/iteration_" << iteration << ".txt";
-
-    ofstream fichier(fichierNom.str());
-    if (!fichier) {
-        cerr << "Erreur lors de la création du fichier : " << fichierNom.str() << endl;
-        return;
-    }
-
-    for (int i = 0; i < grille.getHauteur(); ++i) {
-        for (int j = 0; j < grille.getLargeur(); ++j) {
-            fichier << grille.getValue(i, j) << " ";
-        }
-        fichier << endl;
-    }
-
-    fichier.close();
-}
-
-void nettoyerDossier(const string &cheminDossier) {
-    if (fs::exists(cheminDossier)) {
-        fs::remove_all(cheminDossier);
-    }
-    fs::create_directory(cheminDossier);
-}
-
-void genererFichierAleatoire(const string &chemin, int hauteur, int largeur) {
-    ofstream fichier(chemin);
-    if (!fichier) {
-        cerr << "Erreur lors de la création du fichier." << endl;
-        return;
-    }
-
-    srand(time(nullptr)); // Initialisation de la graine pour rand()
-
-    for (int i = 0; i < hauteur; ++i) {
-        for (int j = 0; j < largeur; ++j) {
-            fichier << rand() % 2 << " "; // Génère des cellules avec des états 0 ou 1
-        }
-        fichier << endl;
-    }
-
-    fichier.close();
-    cout << "Fichier généré avec succès : " << chemin << endl;
 }
 
 int main() {
@@ -146,8 +60,8 @@ int main() {
         cout << "Entrez la largeur de la grille : ";
         cin >> largeur;
 
-        genererFichierAleatoire(chemin, hauteur, largeur);
-        fichier = Fichier(chemin);
+        Fichier fichier(chemin);  
+        fichier.genererFichierAleatoire(chemin, hauteur, largeur);  
     }
 
     grille = fichier.versGrille();
@@ -171,9 +85,9 @@ int main() {
             cout << "---" << endl;
 
             // Sauvegarde de l'état actuel dans un fichier
-            sauvegarderEtat(grille, dossierSortie, i);
+            fichier.sauvegarderEtat(grille, dossierSortie, i);  // Utilisation de la méthode sauvegarderEtat
             grille.run();
-        }
+}
 
         cout << "Les états ont été sauvegardés dans le dossier : " << dossierSortie << endl;
 
