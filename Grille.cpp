@@ -11,7 +11,7 @@ Grille::Grille()
 }
 
 Grille::Grille(vector<vector<Cellule>> g) : grille(g) {}
-int Grille::getValue(int h, int l)
+int Grille::getValue(int h, int l) const
 {
     return this->grille[h][l].getEtat();
 }

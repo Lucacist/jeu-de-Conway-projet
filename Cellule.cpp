@@ -15,7 +15,7 @@ void Cellule::setEtat(int etat)
     this->etat=etat;
 }
 
-int Cellule::getEtat()
+int Cellule::getEtat() const 
 {
     return this->etat;
 }

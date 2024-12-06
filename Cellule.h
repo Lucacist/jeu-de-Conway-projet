@@ -7,7 +7,7 @@ public:
     Cellule();
     Cellule(int etat);
     void setEtat(int etat);
-    int getEtat();
+    int getEtat() const;
     bool operator==(const Cellule &other) const; // Add this line
 };
 
