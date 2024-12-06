@@ -2,25 +2,25 @@
 
 Cellule::Cellule()
 {
-    this->etat=0;
+    this->etat = 0;
 }
 
 Cellule::Cellule(int etat)
 {
-    this->etat=etat;
+    this->etat = etat;
 }
 
 void Cellule::setEtat(int etat)
 {
-    this->etat=etat;
+    this->etat = etat;
 }
 
-int Cellule::getEtat() const 
+int Cellule::getEtat() const
 {
     return this->etat;
 }
 
 bool Cellule::operator==(const Cellule &other) const
 {
-    return this->etat==other.etat;
+    return this->etat == other.etat;
 }
