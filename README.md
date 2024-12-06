@@ -1,6 +1,12 @@
 # Livrable Programme
 
-https://github.com/Lucacist/jeu-de-Conway-projet
+![Static Badge](https://img.shields.io/badge/C++-1F8DE2)
+![Static Badge](https://img.shields.io/badge/header-0002E1)
+![Static Badge](https://img.shields.io/badge/Makefile-E18700)
+
+
+[Voir le projet sur GitHub](https://github.com/Lucacist/jeu-de-Conway-projet)
+
 
 # **Document Technique : Projet POO - Le Jeu de la Vie**
 
@@ -26,6 +32,7 @@ Le *Jeu de la Vie* est un automate cellulaire créé par le mathématicien John 
    - Lecture d'un fichier d'entrer qui nous permet d'obtenir une grille et l'état initial des cellules.
    - Simulation des états successifs pour un nombre donné d'itérations.
    - Sauvegarde des états dans un répertoire nommé `<nom_du_fichier_dentree>_out`.
+<img style="width:400px;" alt="Capture d'écran 2024-12-06 143850" src="https://github.com/user-attachments/assets/30dbaa17-e091-4d56-a4ca-13f2066b3b0f">
 
 2. **Mode Graphique (avec SFML) :**
    - Affichage de la grille et des états des cellules en temps réel.
