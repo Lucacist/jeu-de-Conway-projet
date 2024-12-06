@@ -4,6 +4,8 @@
 #include <sstream>
 #include <SFML/Graphics.hpp>
 #include <filesystem>
+#include <cstdlib> // pour rand() et srand()
+#include <ctime>   // pour initialiser rand()
 #include "Grille.h"
 #include "Fichier.h"
 
@@ -59,15 +61,48 @@ void nettoyerDossier(const string &cheminDossier) {
     fs::create_directory(cheminDossier);
 }
 
+void genererFichierAleatoire(const string &chemin, int hauteur, int largeur) {
+    ofstream fichier(chemin);
+    if (!fichier) {
+        cerr << "Erreur lors de la création du fichier." << endl;
+        return;
+    }
+
+    srand(time(nullptr)); // Initialisation de la graine pour rand()
+
+    for (int i = 0; i < hauteur; ++i) {
+        for (int j = 0; j < largeur; ++j) {
+            fichier << rand() % 2 << " "; // Génère des cellules avec des états 0 ou 1
+        }
+        fichier << endl;
+    }
+
+    fichier.close();
+    cout << "Fichier généré avec succès : " << chemin << endl;
+}
+
 int main() {
     string chemin;
     cout << "Entrer le chemin du fichier\n";
     cin >> chemin;
 
     bool pause = false;
-
     Fichier fichier{chemin};
-    Grille grille = fichier.versGrille();
+    Grille grille;
+
+    if (!fs::exists(chemin)) {
+        cerr << "Erreur : fichier introuvable !" << endl;
+        int hauteur, largeur;
+        cout << "Entrez la hauteur de la grille : ";
+        cin >> hauteur;
+        cout << "Entrez la largeur de la grille : ";
+        cin >> largeur;
+
+        genererFichierAleatoire(chemin, hauteur, largeur);
+        fichier = Fichier(chemin);
+    }
+
+    grille = fichier.versGrille();
 
     cout << "Voulez-vous afficher la grille dans :\n1. Le terminal avec sauvegarde\n2. Une fenêtre graphique\n";
     int choix;
