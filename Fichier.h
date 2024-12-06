@@ -12,6 +12,7 @@ class Fichier {
     int hauteur = 0;
     int largueur = 0;
 public:
+    Fichier();
     Fichier(string c);
     pair<int, int> getDims();
     Grille versGrille();

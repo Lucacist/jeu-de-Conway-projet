@@ -7,6 +7,12 @@
 
 using namespace std;
 
+Fichier::Fichier(){
+    this->hauteur = 0;
+    this->largueur = 0;
+    this->chemin = "";
+}
+
 Fichier::Fichier(string c) {
     this->chemin = c;
     ifstream fichier(chemin);
@@ -40,14 +46,15 @@ Grille Fichier::versGrille() {
 
 // Définition de la méthode genererFichierAleatoire
 void Fichier::genererFichierAleatoire(const string &chemin, int hauteur, int largeur) {
+    this->hauteur = hauteur;
+    this->largueur = largeur;
     ofstream fichier(chemin);
     if (!fichier) {
         cerr << "Erreur lors de la création du fichier." << endl;
         return;
     }
-
+    fichier << this->hauteur << " " << this->largueur << " " << endl;
     srand(time(nullptr)); // Initialisation de la graine pour rand()
-
     for (int i = 0; i < hauteur; ++i) {
         for (int j = 0; j < largeur; ++j) {
             fichier << rand() % 2 << " "; // Génère des cellules avec des états 0 ou 1

@@ -47,23 +47,24 @@ int main() {
     cin >> chemin;
 
     bool pause = false;
-    Fichier fichier{chemin};
-    int hauteur = fichier.getDims().first;
-    int largueur = fichier.getDims().second;
-    Grille grille;
 
     if (!fs::exists(chemin)) {
         cerr << "Erreur : fichier introuvable !" << endl;
+        cout << "Création du fichier : " << chemin << endl;
         int hauteur, largeur;
         cout << "Entrez la hauteur de la grille : ";
         cin >> hauteur;
         cout << "Entrez la largeur de la grille : ";
         cin >> largeur;
 
-        Fichier fichier(chemin);  
+        Fichier fichier;
         fichier.genererFichierAleatoire(chemin, hauteur, largeur);  
     }
 
+    Fichier fichier{chemin};
+    int hauteur = fichier.getDims().first;
+    int largueur = fichier.getDims().second;
+    Grille grille;
     grille = fichier.versGrille();
 
     cout << "Voulez-vous afficher la grille dans :\n1. Le terminal avec sauvegarde\n2. Une fenêtre graphique\n";
@@ -113,7 +114,7 @@ int main() {
         textFin.setString("FIN");
         textFin.setPosition(largueur*cellSize/2,hauteur * cellSize/2);
         textFin.setFillColor(sf::Color::Red);
-        sf::RenderWindow window(sf::VideoMode(hauteur * cellSize, largueur * cellSize), "Jeu de la vie - Grille");
+        sf::RenderWindow window(sf::VideoMode(1440, 900), "Jeu de la vie - Grille");
         while (window.isOpen()) {
             sf::Event event;
             while (window.pollEvent(event)) {
