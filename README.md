@@ -1,8 +1,8 @@
 # 🚀 **Livrable Programme**
 
-[![forthebadge](https://forthebadge.com/images/badges/made-with-c-plus-plus.svg)](https://forthebadge.com)  
-![Static Badge](https://img.shields.io/badge/header-0002E1)  
-![Static Badge](https://img.shields.io/badge/Makefile-E18700)
+![Static Badge](https://img.shields.io/badge/fait_avec-c++-blue?logo=cplusplus)  
+![Static Badge](https://img.shields.io/badge/Headers-purple?logo=c)  
+![Static Badge](https://img.shields.io/badge/makefile-orange.svg?logo=data:image/svg%2bxml;base64,PHN2ZyByb2xlPSJpbWciIHZpZXdCb3g9IjAgMCAyNCAyNCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48dGl0bGU+QW5rZXJNYWtlPC90aXRsZT48cGF0aCBkPSJtMTIuMzUgMTAuNDYyIDMuMDc1IDMuMTIyYy4xODcuMTg3LjE4Ny40MiAwIC42MDZsLTMuMTIyIDMuMTIzYy0uMTg2LjE4Ni0uNDIuMTg2LS42MDYgMEw4LjU3NSAxNC4xOWMtLjE4Ny0uMTg2LS4xODctLjQxOSAwLS42MDZsMy4xNjktMy4xMjJjLjE4Ni0uMTg2LjQxOS0uMTg2LjYwNiAwWm0tMS41ODUtMS41ODRjLjE0LjE4Ni4xNC40MTktLjA0Ny42MDVsLTMuMTIyIDMuMTIzYy0uMTg2LjE4Ni0uNDE5LjE4Ni0uNjA2IDBsLTEuNzI0LTEuNzI0djEyLjY3NUgwVi40NDNoMi4zM2w4LjQzNSA4LjQzNVpNMjEuNzE3LjQ0M0gyNHYyMy4xMTRoLTUuMjY2VjEwLjg4MmwtMS43MjQgMS43MjRjLS4xODcuMTg2LS40Mi4xODYtLjYwNiAwbC0zLjEyMi0zLjEyM2MtLjE4Ny0uMTg2LS4xODctLjQxOSAwLS42MDVMMjEuNzE3LjQ0M1oiLz48L3N2Zz4=)
 
 [👉 Voir le projet sur GitHub](https://github.com/Lucacist/jeu-de-Conway-projet)
 
