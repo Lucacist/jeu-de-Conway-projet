@@ -9,46 +9,62 @@
 #include "Grille.h"
 #include "Fichier.h"
 
-
 using namespace std;
 namespace fs = std::filesystem;
 
 const int cellSize = 10;
 
-void renderGrid(sf::RenderWindow &window, Grille &grille) {
+void renderGrid(sf::RenderWindow &window, Grille &grille)
+{
     int hauteur = grille.getHauteur();
     int largeur = grille.getLargeur();
 
     window.clear();
     sf::RectangleShape cell(sf::Vector2f(cellSize - 1.0f, cellSize - 1.0f));
-    for (int x = 0; x < hauteur; ++x) {
-        for (int y = 0; y < largeur; ++y) {
-            if (grille.getValue(x, y) > 0) {
+    for (int x = 0; x < hauteur; ++x)
+    {
+        for (int y = 0; y < largeur; ++y)
+        {
+            if (grille.getValue(x, y) > 0)
+            {
                 cell.setFillColor(sf::Color::White);
                 cell.setPosition(y * cellSize, x * cellSize);
-                if (grille.getValue(x, y) == 2) { cell.setFillColor(sf::Color::Red); }
-                if (grille.getValue(x, y) == 3) { cell.setFillColor(sf::Color::Green); }
+                if (grille.getValue(x, y) == 2)
+                {
+                    cell.setFillColor(sf::Color::Red);
+                }
+                if (grille.getValue(x, y) == 3)
+                {
+                    cell.setFillColor(sf::Color::Green);
+                }
                 window.draw(cell);
             }
         }
     }
 }
 
-void nettoyerDossier(const string &cheminDossier) {
-    if (fs::exists(cheminDossier)) {
+void nettoyerDossier(const string &cheminDossier)
+{
+    if (fs::exists(cheminDossier))
+    {
         fs::remove_all(cheminDossier);
     }
     fs::create_directory(cheminDossier);
 }
 
-int main() {
+int main()
+{
     string chemin;
     cout << "Entrer le chemin du fichier\n";
     cin >> chemin;
 
+    int largueurFenetre = 1440;
+    int HauteurFenetre = 900;
+    int delai = 5;
     bool pause = false;
 
-    if (!fs::exists(chemin)) {
+    if (!fs::exists(chemin))
+    {
         cerr << "Erreur : fichier introuvable !" << endl;
         cout << "Création du fichier : " << chemin << endl;
         int hauteur, largeur;
@@ -58,7 +74,7 @@ int main() {
         cin >> largeur;
 
         Fichier fichier;
-        fichier.genererFichierAleatoire(chemin, hauteur, largeur);  
+        fichier.genererFichierAleatoire(chemin, hauteur, largeur);
     }
 
     Fichier fichier{chemin};
@@ -71,7 +87,8 @@ int main() {
     int choix;
     cin >> choix;
 
-    if (choix == 1) {
+    if (choix == 1)
+    {
         // Création du dossier de sortie
         string dossierSortie = chemin + "_out";
         nettoyerDossier(dossierSortie);
@@ -81,78 +98,108 @@ int main() {
         cout << "Combien d'itérations voulez-vous sauvegarder ?\n";
         cin >> n;
 
-        for (int i = 0; i < n && grille.isRunning(); ++i) {
+        for (int i = 0; i < n && grille.isRunning(); ++i)
+        {
             grille.print();
             cout << "---" << endl;
 
             // Sauvegarde de l'état actuel dans un fichier
-            fichier.sauvegarderEtat(grille, dossierSortie, i);  // Utilisation de la méthode sauvegarderEtat
+            fichier.sauvegarderEtat(grille, dossierSortie, i); // Utilisation de la méthode sauvegarderEtat
             grille.run();
-}
+        }
 
         cout << "Les états ont été sauvegardés dans le dossier : " << dossierSortie << endl;
-
-    } else if (choix == 2) {
+    }
+    else if (choix == 2)
+    {
         sf::Font font;
-        if (!font.loadFromFile("Inter-Black.woff2")){
-            cout<<"Erreur lors de l'ouverture de la police";
+        if (!font.loadFromFile("Inter-Black.woff2"))
+        {
+            cout << "Erreur lors de l'ouverture de la police";
         }
         sf::Text textClic;
         textClic.setFont(font);
         textClic.setString("Clic gauche pour ajouter une cellule");
         textClic.setCharacterSize(16);
-        textClic.setFillColor(sf::Color::White);
-        textClic.setPosition(10,hauteur * cellSize-50);
-        sf::Text textEspace=textClic;
+        textClic.setFillColor(sf::Color::Yellow);
+        textClic.setPosition(10, HauteurFenetre - 60);
+        sf::Text textEspace = textClic;
         textEspace.setString("Espace pour mettre en pause");
-        textEspace.setPosition(10,hauteur * cellSize-30);
-        sf::Text textPause=textClic;
+        textEspace.setPosition(10, HauteurFenetre - 40);
+        sf::Text textFleche = textEspace;
+        textFleche.setString("^/v pour modifier la vitesse");
+        textFleche.setPosition(10, HauteurFenetre - 20);
+        sf::Text textVitesse = textFleche;
+        textVitesse.setPosition(largueurFenetre-50, HauteurFenetre - 20);
+        sf::Text textPause = textVitesse;
         textPause.setString("PAUSE");
         textPause.setStyle(sf::Text::Bold);
-        textPause.setPosition(largueur*cellSize/2,hauteur * cellSize/2+50);
-        sf::Text textFin=textPause;
+        textPause.setPosition(largueurFenetre / 2, HauteurFenetre / 2 + 50);
+        sf::Text textFin = textPause;
         textFin.setString("FIN");
-        textFin.setPosition(largueur*cellSize/2,hauteur * cellSize/2);
+        textFin.setPosition(largueurFenetre / 2, HauteurFenetre / 2);
         textFin.setFillColor(sf::Color::Red);
-        sf::RenderWindow window(sf::VideoMode(1440, 900), "Jeu de la vie - Grille");
-        while (window.isOpen()) {
+        sf::RenderWindow window(sf::VideoMode(largueurFenetre, HauteurFenetre), "Jeu de la vie - Grille");
+        while (window.isOpen())
+        {
             sf::Event event;
-            while (window.pollEvent(event)) {
-                if (event.type == sf::Event::Closed) {
+            while (window.pollEvent(event))
+            {
+                if (event.type == sf::Event::Closed)
+                {
                     window.close();
                 }
-                if (event.type == sf::Event::KeyPressed) {
-                    switch (event.key.code) {
-                        case sf::Keyboard::Space:
-                            pause = !pause;
-                            break;
+                if (event.type == sf::Event::KeyPressed)
+                {
+                    switch (event.key.code)
+                    {
+                    case sf::Keyboard::Space:
+                        pause = !pause;
+                        break;
+                    case sf::Keyboard::Down:
+                        delai = min(delai + 1, 10);
+                        break;
+
+                    case sf::Keyboard::Up:
+                        delai = max(delai - 1, 1);
+                        break;
                     }
                 }
-                if (sf::Mouse::isButtonPressed(sf::Mouse::Left)) {
+                if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
+                {
                     sf::Vector2i mousePos = sf::Mouse::getPosition(window);
                     int h = mousePos.y / cellSize;
                     int l = mousePos.x / cellSize;
-                    if (h < grille.getHauteur() && l < grille.getLargeur()) {
+                    if (h < grille.getHauteur() && l < grille.getLargeur())
+                    {
                         grille.setValue(h, l, 1);
                     }
                 }
             }
-            renderGrid(window,grille);
+            renderGrid(window, grille);
             window.draw(textClic);
             window.draw(textEspace);
-            if (grille.running && pause){
+            window.draw(textFleche);
+            textVitesse.setString(std::to_string(11-delai));
+            window.draw(textVitesse);
+            if (grille.running && pause)
+            {
                 window.draw(textPause);
             }
-            if (!grille.running){
+            if (!grille.running)
+            {
                 window.draw(textFin);
             }
-            if (grille.running && !pause){
+            if (grille.running && !pause)
+            {
                 grille.run();
             }
             window.display();
-            sf::sleep(sf::milliseconds(50));
+            sf::sleep(sf::milliseconds(delai * 10));
         }
-    } else {
+    }
+    else
+    {
         cerr << "Choix invalide." << endl;
     }
 
