@@ -6,9 +6,34 @@
 
 [👉 Voir le projet sur GitHub](https://github.com/Lucacist/jeu-de-Conway-projet)
 
+# 📋 **Sommaire**
+
+1. **[Introduction](#1-introduction)**  
+   - Présentation du projet et des objectifs.  
+
+2. **[Principe de Fonctionnement](#2-principe-de-fonctionnement)**  
+   - Règles d’évolution des cellules.  
+   - Structure de la grille et états des cellules.  
+
+3. **[Spécifications Techniques](#3-spécifications-techniques)**  
+   - **[Fonctionnalités de Base](#31-fonctionnalités-de-base)**  
+     - Mode console.  
+     - Mode graphique avec SFML.  
+   - **[Extensions Réalisées](#32-extensions-réalisées)**  
+     - Grille torique.  
+     - Cellules obstacles.  
+   - **[Bonus](#33-bonus)**  
+     - Modification dynamique des cellules.  
+     - Pause dans le mode graphique.  
+     - Génération d’un fichier aléatoire.  
+
+4. **[Implémentation en C++](#4-implémentation-en-c++)**  
+   - Langage et bibliothèques utilisés.  
+   - Structure du projet.  
+
 ---
 
-# 📄 **Document Technique : Projet POO - Le Jeu de la Vie**
+# 📄 Document Technique : Projet POO - Le Jeu de la Vie
 
 ## 📝 **1. Introduction**  
 Le *Jeu de la Vie* est un automate cellulaire créé par le mathématicien John Conway. Il modélise l’évolution d’une population de cellules vivantes ou mortes dans une grille bidimensionnelle, selon des règles précises. Ce projet a pour objectif de développer une simulation du Jeu de la Vie en C++ en s'appuyant sur les principes de la programmation orientée objet (POO).
