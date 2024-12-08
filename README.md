@@ -29,16 +29,26 @@
 
 4. **[Implémentation en C++](#-4-impl%C3%A9mentation-en-c)**  
    - Langage et bibliothèques utilisés.  
-   - Structure du projet.  
+   - Structure du projet.
+
+5. **[Lancer le Jeu](#-5-lancer-le-jeu)**  
+   - Ouvrir le terminal et accéder au dossier du projet.  
+   - Compiler le projet avec `make`.  
+   - Lancer le jeu avec `./main`.  
+   - Suivre les consignes affichées dans le terminal.
 
 ---
 
+   <br>  
+
 # 📄 Document Technique : Projet POO - Le Jeu de la Vie
+
+   <br>  
 
 ## 📝 **1. Introduction**  
 Le *Jeu de la Vie* est un automate cellulaire créé par le mathématicien John Conway. Il modélise l’évolution d’une population de cellules vivantes ou mortes dans une grille bidimensionnelle, selon des règles précises. Ce projet a pour objectif de développer une simulation du Jeu de la Vie en C++ en s'appuyant sur les principes de la programmation orientée objet (POO).
 
----
+   <br>  
 
 ## ⚙️ **2. Principe de Fonctionnement**  
 - **Règles d’évolution des cellules :**  
@@ -53,22 +63,26 @@ Le *Jeu de la Vie* est un automate cellulaire créé par le mathématicien John 
   - Grille bidimensionnelle.  
   - Les cellules sont affectées par leur voisinage (8 cellules adjacentes, sauf en mode torique).
 
----
+   <br>  
 
 ## 🖥️ **3. Spécifications Techniques**  
 ### ✨ **3.1. Fonctionnalités de Base**
 1. **Mode Console :**  
    - Lecture d'un fichier d'entrer qui nous permet d'obtenir une grille et l'état initial des cellules.  
    - Simulation des états successifs pour un nombre donné d'itérations.  
-   - Sauvegarde des états dans un répertoire nommé `<nom_du_fichier_dentree>_out`.  
+   - Sauvegarde des états dans un répertoire nommé `<nom_du_fichier_dentree>_out`.
+
+    <br>  
 
    <img style="width:400px;" alt="Capture d'écran 2024-12-06 143850" src="https://github.com/user-attachments/assets/30dbaa17-e091-4d56-a4ca-13f2066b3b0f">  
    <br>  
 
-2. **Mode Graphique (avec SFML) :**  
+1. **Mode Graphique (avec SFML) :**  
    - Affichage de la grille et des états des cellules en temps réel.  
    - Contrôle du temps entre deux itérations avec les touches "<" et ">".  
-   - Possibilité de **modifier l'état des cellules avec la souris**.  
+   - Possibilité de **modifier l'état des cellules avec la souris**.
+  
+        <br>  
 
    <img width="400" alt="Capture d'écran 2024-12-06 144330" src="https://github.com/user-attachments/assets/3f1c7202-4596-4429-9ac7-7563f1d5c524">
 
@@ -90,7 +104,7 @@ Le *Jeu de la Vie* est un automate cellulaire créé par le mathématicien John 
    - Génération automatique d'un fichier d’entrée aléatoire si le fichier spécifié n’existe pas.  
    - Dimensions demandées à l'utilisateur.
 
----
+   <br>  
 
 ## 🔧 **4. Implémentation en C++**
 - **Langage :** C++  
@@ -103,3 +117,33 @@ Le *Jeu de la Vie* est un automate cellulaire créé par le mathématicien John 
    - `Makefile` : Script de compilation automatisé pour construire le projet, en gérant les dépendances et les règles pour produire l'exécutable.  
    - `Input.txt` : Fichier d'entrée de base, contenant la taille de la grille et l'état initial des cellules. Ce fichier est utilisé pour initialiser la simulation.  
    - `\Input.txt_out` : Dossier de sortie par défaut, où sont sauvegardés les fichiers correspondant aux états successifs de la grille à chaque itération pour le fichier d'entrée par default (Input.txt).
+
+    <br>  
+
+## 🚀 **5. Lancer le Jeu**
+
+### 1. **Ouvrir le Terminal**
+   - Ouvrez votre terminal (sur Linux).
+
+### 2. **Accéder au Dossier du Projet**
+   - Utilisez la commande `cd` pour naviguer dans le dossier où sont stockés les fichiers du projet. Par exemple :
+     ```bash
+     cd chemin/vers/le/dossier/du/projet
+     ```
+
+### 3. **Compiler le Projet avec `make`**
+   - Une fois dans le dossier du projet, tapez la commande suivante pour compiler le projet en utilisant le `Makefile` :
+     ```bash
+     make
+     ```
+   - Cela générera un exécutable nommé `main`.
+
+### 4. **Lancer le Jeu**
+   - Après la compilation, vous pourrez lancer le jeu avec la commande suivante :
+     ```bash
+     ./main
+     ```
+   
+### 5. **Suivre les Consignes**
+   - Une fois le jeu lancé, suivez les consignes qui s'affichent dans le terminal pour interagir avec le jeu.  
+     vous pourrez choisir entre les modes console ou graphique, et configurer la simulation en fonction de vos préférences.
