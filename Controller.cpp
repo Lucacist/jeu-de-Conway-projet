@@ -1,9 +1,6 @@
 #include "Controller.h"
 #include <iostream>
 #include <vector>
-#include <fstream>
-#include <sstream>
-#include <SFML/Graphics.hpp>
 #include <filesystem>
 #include <cstdlib>
 #include <ctime>

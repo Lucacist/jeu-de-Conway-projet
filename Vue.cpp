@@ -1,4 +1,7 @@
 #include "Vue.h"
+#include <iostream>
+
+using namespace std;
 
 const int cellSize = 10;
 

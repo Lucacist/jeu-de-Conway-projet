@@ -33,6 +33,7 @@ void Grille::print()
     }
 };
 
+// Parcourt les 9 cases autour de coordonnées (x,y) données et renvoie le nombre de voisins vivants
 int Grille::AliveNeighbors(int x, int y)
 {
     int number = 0;
@@ -40,20 +41,20 @@ int Grille::AliveNeighbors(int x, int y)
     int cols = grille[0].size();
 
     for (int i = x - 1; i <= x + 1; i++)
-    {
+    { // Double boucle pour parcourir les deux dimensions
         for (int j = y - 1; j <= y + 1; j++)
         {
-            int toricX = (i + rows) % rows;
-            int toricY = (j + cols) % cols;
+            int toricX = (i + rows) % rows; // Utilisation de modulo pour rendre la grille torique
+            int toricY = (j + cols) % cols; // Ex: x=101 pour une grille de 100 devient x=1
 
             if (grille[toricX][toricY].getEtat() == 1 || grille[toricX][toricY].getEtat() == 3)
             {
-                number++;
+                number++; // Incrémente le compteur pour chaque voisins vivants ou obstacles vivants
             }
         }
     }
 
-    return number - grille[x][y].getEtat();
+    return number - grille[x][y].getEtat(); // Renvoie le compteur en soustrayant l'état de la Cellule (x,y)
 }
 
 int Grille::getHauteur()
@@ -71,6 +72,7 @@ bool Grille::isRunning()
     return this->running;
 }
 
+// Parcourt la grille et applique les règles du jeu de la vie pour génerer la nouvelle itération
 void Grille::run()
 {
     vector<vector<Cellule>> newGrid = grille;
@@ -90,7 +92,7 @@ void Grille::run()
     }
     if (grille == newGrid)
     {
-        running = false;
+        running = false; // Si la nouvelle grille est identique à la première, la grille devient figée et le jeu s'arrêtera
     }
-    grille = newGrid;
+    grille = newGrid; // La grille actuelle est remplacée par la nouvelle
 }

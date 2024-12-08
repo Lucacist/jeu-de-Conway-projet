@@ -1,19 +1,9 @@
 #ifndef VUE_H
 #define VUE_H
 
-#include <iostream>
-#include <vector>
-#include <fstream>
-#include <sstream>
 #include <SFML/Graphics.hpp>
-#include <filesystem>
-#include <cstdlib>
-#include <ctime>
 #include "Grille.h"
-#include "Fichier.h"
 
-using namespace std;
-namespace fs = std::filesystem;
 /**
  * @brief Classe permettant de gérer l'affichage des deux modes
  *
