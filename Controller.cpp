@@ -36,8 +36,6 @@ void Controller::run()
     cout << "Entrer le chemin du fichier\n";
     cin >> chemin;
 
-    int largueurF = 1440;
-    int hauteurF = 900;
     int delai = 5;
     bool pause = false;
 
