@@ -1,4 +1,6 @@
-#include "Controller.h"
+#ifndef CONTROLLER_H
+#define CONTROLLER_H
+
 #include <iostream>
 #include <vector>
 #include <fstream>
@@ -10,15 +12,18 @@
 #include "Grille.h"
 #include "Fichier.h"
 #include "Vue.h"
-#include "Controller.h"
 
 using namespace std;
 namespace fs = std::filesystem;
 
-int main()
+class Controller
 {
     Vue vue;
-    Controller controller{vue};
-    controller.run();
-    return 0;
-}
+
+public:
+    Controller(Vue vue);
+    void run();
+    void nettoyerDossier(const string &cheminDossier);
+};
+
+#endif
